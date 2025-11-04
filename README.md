@@ -326,7 +326,7 @@ Contributions are welcome! Areas that need help:
 ## Credits
 
 **Mission Design & Development:** J. Schmidt  
-**Icons & Textures:** VolumeInfinite
+**Icons & Textures:** VolumeInfinite  
 **UI Framework:** Windows 98 CSS Recreation  
 **Dependencies:** CBA_A3, ACE3  
 **Community:** Arma 3 modding community
