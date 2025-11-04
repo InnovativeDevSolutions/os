@@ -1,0 +1,4 @@
+py7zr
+brotli
+brotlipy
+brotlicffi

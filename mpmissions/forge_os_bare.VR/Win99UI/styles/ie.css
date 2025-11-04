@@ -1,0 +1,152 @@
+/* Internet Explorer Component
+   Core styling for browser interface and navigation elements */
+
+/* Menu Bar */
+.ie-menu-bar {
+    display: flex;
+    padding: 2px 0;
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+
+    & span {
+        padding: 2px 6px;
+        cursor: default;
+
+        &:hover {
+            background: navy;
+            color: #fff;
+        }
+    }
+}
+
+/* Navigation Toolbar */
+.ie-toolbar {
+    padding: 4px;
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+/* Navigation Buttons */
+.ie-buttons {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 4px;
+
+    & button {
+        padding: 4px 8px;
+        min-width: 60px;
+        font-family: "Pixelated MS Sans Serif", Arial;
+        font-size: 11px;
+
+        &:disabled {
+            color: grey;
+            text-shadow: 1px 1px #ffffff;
+        }
+    }
+}
+
+/* Address Bar */
+.ie-address-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+    padding: 4px;
+
+    & span {
+        white-space: nowrap;
+    }
+
+    & input {
+        flex: 1;
+        height: 21px;
+        padding: 3px 4px;
+        box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+    }
+
+    & button {
+        min-width: 40px;
+    }
+}
+
+/* Content Area */
+.ie-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 2px;
+    background: #ffffff;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+
+/* 404 Error Page */
+.ie-404 {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+
+    & h1 {
+        color: #000000;
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
+
+    & h2 {
+        color: #000000;
+        margin-bottom: 20px;
+    }
+
+    & p {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    & hr {
+        border: none;
+        border-top: 2px solid grey;
+        margin: 20px auto;
+        width: 80%;
+    }
+
+    & .technical-info {
+        background: silver;
+        padding: 15px;
+        border: 1px solid grey;
+        box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+        width: 80%;
+        margin: 0 auto;
+        text-align: left;
+
+        & p:first-child {
+            color: navy;
+            font-weight: bold;
+        }
+    }
+
+    & .error-message {
+        margin-top: 20px;
+        color: grey;
+    }
+}
+
+/* Status Bar */
+.status-bar {
+    padding: 2px 4px;
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+
+    & .status-bar-field {
+        margin: 0;
+        font-size: 11px;
+        box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+        padding: 2px 4px;
+    }
+}
+
+.loading-text {
+    font-family: "Pixelated MS Sans Serif", Arial;
+    font-size: 11px;
+}

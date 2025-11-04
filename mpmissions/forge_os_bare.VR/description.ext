@@ -1,0 +1,48 @@
+#include "config.h"
+
+author = "J. Schmidt";
+onLoadName = "Forge OS";
+onLoadMission = "Windows 99 OS built using HTML, JS and CSS";
+briefingName = "Forge OS";
+overviewText = "A fully functional Windows 99-style operating system interface built with HTML, JavaScript, and CSS. Features desktop environment, applications, and multiplayer communication.";
+
+import RscText;
+import RscPicture;
+import RscPictureKeepAspect;
+
+class RscWin99OSDisplay {
+    idd = 13371338;
+    fadein = 0;
+    fadeout = 0;
+    duration = 1e+011;
+    onLoad = "_this call forge_fnc_OSDisplayLoad";
+
+    class controls {
+        class Texture: RscText {
+            type = 106;
+            idc = 1337;
+            x = 0;
+            y = 0;
+            w = 1;
+            h = 1;
+        };
+    };
+};
+
+class RscWin99OSDisplayControl {
+    idd = 13371338;
+    fadein = 0;
+    fadeout = 0;
+    duration = 1e+011;
+
+    class controls {
+        class Texture: RscText {
+            type = 106;
+            idc = 1337;
+            x = safezoneY * (pixelW/pixelH) * 0.975;
+            y = safezoneY + (safezoneH * 0.0575);
+            w = safezoneH * (pixelW/pixelH) * 1.17;
+            h = safezoneH * 0.875;
+        };
+    };
+};

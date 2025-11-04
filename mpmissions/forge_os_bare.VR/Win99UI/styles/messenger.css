@@ -1,0 +1,135 @@
+/* Messenger Component
+   Core styling for instant messaging interface */
+
+/* Window Layout */
+.messenger-window .window-body {
+    padding: 0;
+}
+
+.messenger-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+/* Sidebar Layout */
+.messenger-sidebar {
+    width: 200px;
+    border-right: 1px solid #888;
+    display: flex;
+    flex-direction: column;
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+
+    /* User List */
+    & .messenger-users {
+        flex: 1;
+        overflow-y: auto;
+        background: #fff;
+        box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+    }
+
+    /* Status Selector */
+    & .messenger-status {
+        padding: 10px 8px;
+        border-top: 1px solid #888;
+        background: silver;
+
+        & select {
+            width: 100%;
+        }
+    }
+}
+
+/* Main Chat Area */
+.messenger-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: silver;
+
+    /* Message Display */
+    & .messenger-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 8px;
+        background: #fff;
+        box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+    }
+
+    /* Input Area */
+    & .messenger-input {
+        display: flex;
+        padding: 9px 8px;
+        gap: 8px;
+        border-top: 1px solid #888;
+        background: silver;
+
+        & input {
+            flex: 1;
+        }
+
+        & button {
+            min-width: 60px;
+        }
+    }
+}
+
+/* Message Styling */
+.message {
+    margin-bottom: 8px;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #888;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+
+    & .message-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+        font-size: 0.9em;
+        color: #666;
+    }
+}
+
+/* User List Styling */
+.user-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    cursor: pointer;
+
+    &:hover {
+        background: navy;
+        color: #fff;
+    }
+
+    & .status-indicator {
+        margin-right: 8px;
+    }
+}
+
+/* Status Indicators */
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: inset -1px -1px #0a0a0a;
+
+    &.online {
+        background-color: #2ecc71;
+    }
+
+    &.away {
+        background-color: #f1c40f;
+    }
+
+    &.busy {
+        background-color: #e74c3c;
+    }
+
+    &.offline {
+        background-color: #95a5a6;
+    }
+}

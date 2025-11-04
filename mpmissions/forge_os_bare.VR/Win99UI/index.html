@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<!--
+    Win99 OS - Entry Point
+    ======================
+    
+    This is the main HTML entry point for the Win99 operating system interface.
+    It handles asynchronous loading and initialization of all system components.
+    
+    ARCHITECTURE:
+    - Uses Arma 3's A3API for file system access (loads from mission directory)
+    - CSS files are zlib-compressed and base64-encoded (.css.b64 format)
+    - JavaScript modules loaded sequentially to maintain dependency order
+    - All assets loaded asynchronously via Promises for optimal performance
+    
+    LOADING SEQUENCE:
+    1. Decompress and apply CSS stylesheets (parallel loading)
+    2. Load core JavaScript modules (sequential loading):
+       - a3bridge.js: Arma 3 ↔ Browser communication bridge
+       - globalFunctions.js: Backend callback handlers
+       - config.js: System configuration (apps, start menu, desktop, filesystem)
+       - loader.js: Dynamic component loader with zlib decompression
+       - main.js: Win99OS orchestrator class
+    3. Initialize Win99OS instance
+    
+    COMPRESSION:
+    - CSS files compressed using zlib algorithm (see Win99UI/tools/compress_css.py)
+    - Decompressed at runtime using browser's DecompressionStream API
+    - Reduces file size and improves loading performance
+    
+    DEPENDENCIES:
+    - A3API: Provided by Arma 3's CEF browser control
+    - DecompressionStream: Modern browser API for zlib decompression
+    
+    AUTHOR: J. Schmidt
+    VERSION: 2.0.0
+-->
+
+<head>
+    <title>Win99 OS</title>
+    <script>
+        /**
+         * decompressZlibToDataURL
+         * 
+         * Decompresses zlib-compressed base64 CSS data and creates a blob URL.
+         * 
+         * Process:
+         * 1. Decode base64 string to binary data (Uint8Array)
+         * 2. Create DecompressionStream with 'deflate' algorithm (zlib format)
+         * 3. Stream binary data through decompression
+         * 4. Convert decompressed data to ArrayBuffer
+         * 5. Create Blob and generate object URL for stylesheet injection
+         * 
+         * @param {string} base64string - Base64-encoded zlib-compressed CSS data
+         * @returns {Promise<string>} Object URL pointing to decompressed CSS blob
+         * 
+         * @example
+         * const url = await decompressZlibToDataURL(compressedCSSData);
+         * // url: "blob:null/abc-123-def"
+         */
+        const decompressZlibToDataURL = base64string => {
+            // Decode base64 to binary byte array
+            const bytes = Uint8Array.from(atob(base64string), c => c.charCodeAt(0));
+
+            // Create decompression stream (zlib/deflate algorithm)
+            const cs = new DecompressionStream('deflate');
+            const writer = cs.writable.getWriter();
+
+            // Write compressed data and close stream
+            writer.write(bytes);
+            writer.close();
+
+            // Convert decompressed stream to blob URL
+            return new Response(cs.readable).arrayBuffer().then(function (arrayBuffer) {
+                return URL.createObjectURL(new Blob([arrayBuffer]));
+            });
+        };
+
+        // ====================================================================
+        // INITIALIZATION SEQUENCE
+        // ====================================================================
+
+        /**
+         * STEP 1: Load and Decompress CSS Stylesheets
+         * 
+         * Load all compressed CSS files in parallel for optimal performance.
+         * Each file is zlib-compressed and base64-encoded (.css.b64 format).
+         * 
+         * Stylesheets:
+         * - 98.css: Windows 98 base theme and desktop environment
+         * - ie.css: Internet Explorer browser component styles
+         * - dialog.css: Dialog boxes and system prompts
+         * - messenger.css: Messenger application interface
+         * - calendar.css: Calendar application interface
+         * - snet.css: Intelligence Center (SNet) interface
+         */
+        Promise.all([
+            A3API.RequestFile("Win99UI\\styles\\98.css.b64"),        // Base Windows 98 theme
+            A3API.RequestFile("Win99UI\\styles\\ie.css.b64"),        // Internet Explorer styles
+            A3API.RequestFile("Win99UI\\styles\\dialog.css.b64"),    // Dialog boxes
+            A3API.RequestFile("Win99UI\\styles\\messenger.css.b64"), // Messenger app
+            A3API.RequestFile("Win99UI\\styles\\calendar.css.b64"),  // Calendar app
+            A3API.RequestFile("Win99UI\\styles\\snet.css.b64")       // SNet Intelligence Center
+        ]).then(compressedStyles => {
+            // Decompress all CSS files in parallel
+            return Promise.all(compressedStyles.map(css => decompressZlibToDataURL(css)));
+
+        }).then(decompressedUrls => {
+            // Inject all decompressed stylesheets into document head
+            decompressedUrls.forEach(url => {
+                const link = document.createElement('link');
+                link.type = 'text/css';
+                link.rel = 'stylesheet';
+                link.media = 'screen';
+                link.href = url;  // Blob URL pointing to decompressed CSS
+                document.head.appendChild(link);
+            });
+
+            /**
+             * STEP 2: Load Core JavaScript Modules
+             * 
+             * Load system modules in strict sequential order to maintain dependencies.
+             * Each module must be loaded and executed before the next one begins.
+             */
+
+            // Module 1: a3bridge.js - Arma 3 ↔ Browser Communication Bridge
+            // Provides: A3Bridge.sendCommand(), A3Bridge.loadFile(), A3Bridge.loadIcon()
+            return A3API.RequestFile("Win99UI\\js\\a3bridge.js");
+
+        }).then(js => {
+            const script = document.createElement('script');
+            script.text = js;
+            document.head.appendChild(script);
+
+            // Module 2: globalFunctions.js - Backend Callback Handlers
+            // Provides: Global functions called by Arma backend (e.g., receiveMessage())
+            return A3API.RequestFile("Win99UI\\js\\globalFunctions.js");
+
+        }).then(js => {
+            const script = document.createElement('script');
+            script.text = js;
+            document.head.appendChild(script);
+
+            // Module 3: config.js - System Configuration
+            // Provides: WIN99_CONFIG with app registry, start menu, desktop icons, SNet filesystem
+            return A3API.RequestFile("Win99UI\\js\\config.js");
+
+        }).then(js => {
+            const script = document.createElement('script');
+            script.text = js;
+            document.head.appendChild(script);
+
+            // Module 4: loader.js - Component Loader
+            // Provides: Dynamic loading of UI components with zlib decompression support
+            return A3API.RequestFile("Win99UI\\js\\loader.js");
+
+        }).then(js => {
+            const script = document.createElement('script');
+            script.text = js;
+            document.head.appendChild(script);
+
+            // Module 5: main.js - Win99OS Orchestrator
+            // Provides: Win99OS class - Core system lifecycle manager
+            return A3API.RequestFile("Win99UI\\js\\main.js");
+
+        }).then(js => {
+            const script = document.createElement('script');
+            script.text = js;
+            document.head.appendChild(script);
+
+            /**
+             * STEP 3: Initialize Operating System
+             * 
+             * Create Win99OS instance and start initialization sequence.
+             * The Win99OS.init() method is called automatically on construction.
+             * 
+             * Initialization stages (see main.js):
+             * 1. Base components (overlay, wallpaper, window system)
+             * 2. Applications (notepad, messenger, calendar, IE, SNet)
+             * 3. User interface (taskbar, start menu)
+             * 4. Desktop icons
+             * 
+             * Global reference created for debugging and external access.
+             */
+            window.os = new Win99OS();
+        });
+    </script>
+</head>
+
+<body>
+    <!--
+        Desktop Container
+        
+        Primary container for the Win99 OS desktop environment.
+        All UI components (windows, icons, taskbar, start menu) are
+        dynamically injected into this container during initialization.
+        
+        This div serves as the root for:
+        - Desktop component (wallpaper, icons)
+        - Window manager (application windows)
+        - Taskbar component
+        - Start menu component
+        - Overlay component (screen transitions)
+        - Dialog boxes (alerts, prompts, confirmations)
+    -->
+    <div class="desktop" id="desktop"></div>
+</body>
+
+</html>

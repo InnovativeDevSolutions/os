@@ -1,0 +1,112 @@
+/* Start Menu Component
+   Core styling for the Windows-style start menu interface */
+
+.start-menu {
+    position: fixed;
+    bottom: 30px;
+    left: 4px;
+    width: 250px;
+    background: #c0c0c0;
+    border: 1px solid;
+    border-color: #c0c0c0 #0a0a0a #0a0a0a #c0c0c0;
+    box-shadow: inset -1px -1px #808080, inset 1px 1px #ffffff;
+    display: none;
+    z-index: 2000;
+
+    &.active {
+        display: block;
+    }
+
+    /* Menu Items Container */
+    & .menu-items {
+        padding: 0 0 0 27px;
+        margin: 0 2px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Start Menu Banner */
+    & .start-menu-banner {
+        background: linear-gradient(to right, #0000a8, #0000a8);
+        width: 28px;
+        height: calc(100% - 2px) !important;
+        position: absolute;
+        left: 1px;
+        top: 1px;
+        z-index: 0;
+
+        & span:last-child {
+            color: white;
+            font-size: 14px;
+            position: absolute;
+            white-space: nowrap;
+            transform-origin: left bottom;
+            left: -50px;
+            bottom: -8px;
+        }
+    }
+
+    /* Menu Item Styling */
+    & .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 4px 6px;
+        font-size: 16px;
+
+        &:hover {
+            background: #000080;
+            color: white;
+            cursor: default;
+        }
+
+        & img {
+            width: 32px;
+            height: 32px;
+            margin-right: 14px;
+        }
+
+        /* Logoff Item Separator */
+        &[data-action="logoff"] {
+            border-top: 1px solid #808080;
+        }
+
+        /* Submenu Handling */
+        &.has-submenu {
+            position: relative;
+
+            &::after {
+                content: '4';
+                position: absolute;
+                right: 8px;
+                font-family: 'Webdings', sans-serif;
+            }
+
+            &:hover .submenu {
+                display: block;
+            }
+
+            /* Submenu Styling */
+            & .submenu {
+                position: absolute;
+                left: 100%;
+                top: 0;
+                background: #c0c0c0;
+                border: 2px solid;
+                border-color: #ffffff #808080 #808080 #ffffff;
+                display: none;
+                min-width: 180px;
+                color: #222222;
+
+                & .menu-item img {
+                    width: 100%;
+                    height: 100%;
+
+                    &:first-child {
+                        width: 24px !important;
+                        height: 24px !important;
+                    }
+                }
+            }
+        }
+    }
+}

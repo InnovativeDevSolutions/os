@@ -1,0 +1,73 @@
+/* Dialog Component
+   Extends 98.css dialog styling with enhanced functionality */
+
+.window.win99-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 300px;
+    z-index: 1001;
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+
+    /* Content Area */
+    & .window-body {
+        padding: 15px;
+        background: silver;
+
+        & .dialog-body {
+            margin-bottom: 6px;
+
+            & input {
+                width: 100%;
+                margin-top: 5px;
+                padding: 3px;
+                box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+            }
+        }
+    }
+
+    /* Action Buttons */
+    & .dialog-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 5px;
+        padding: 8px;
+        background: silver;
+
+        & button {
+            min-width: 70px;
+            padding: 4px 8px;
+
+            &:active {
+                padding: 5px 7px 3px 9px;
+            }
+        }
+    }
+
+    /* File List Interface */
+    & #notepadFileList {
+        border: 1px solid grey;
+        background: white;
+        height: 200px;
+        overflow-y: auto;
+        margin: 5px 0;
+        box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+
+        & .file-item {
+            padding: 2px 4px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: navy;
+                color: white;
+            }
+
+            &.selected {
+                background-color: navy;
+                color: white;
+            }
+        }
+    }
+}

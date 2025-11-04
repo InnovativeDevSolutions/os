@@ -1,0 +1,136 @@
+/* Taskbar Component
+   Core styling for the Windows-style taskbar interface */
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 33px;
+  background: #d1d1d1;
+  border-top: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  box-shadow: 0 -1px 0 0 #f9f9f9;
+  z-index: 1000;
+
+  /* Start Button */
+  & .start-button {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    width: 74px;
+    padding: 3px 5px 3px 4px;
+    margin: 2px;
+    background: #c0c0c0;
+    border: 1px solid;
+    border-color: #ffffff #0a0a0a #0a0a0a #ffffff;
+    box-shadow: inset -1px -1px #808080, inset 1px 1px #ffffff;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: bold;
+
+    & img {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+
+    &.active {
+      border-color: #0a0a0a #ffffff #ffffff #0a0a0a;
+      box-shadow: inset 1px 1px #808080, inset -1px -1px #ffffff;
+    }
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  /* Divider Elements */
+  & .divider {
+    width: 1px;
+    height: 27px;
+    background: #808080;
+    margin: 0 2px;
+    box-shadow: 1px 0 #ffffff;
+  }
+
+  & .dividerBox {
+    height: 22px;
+    width: 2px;
+    background-color: #d1d1d1;
+    border-top: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #808080;
+    border-bottom: 1px solid #808080;
+    margin: 0px 0px 0px 2px;
+  }
+
+  /* Clock Display */
+  & .time {
+    margin-left: auto;
+    padding: 0 8px;
+    font-size: 12px;
+    border: 1px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    width: 65px;
+    justify-content: center;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  /* Application Tabs */
+  & .taskbar-tabs {
+    display: flex;
+    flex: 1;
+    gap: 2px;
+    padding: 2px;
+    margin: 0 4px;
+
+    & .taskbar-tab {
+      display: flex;
+      align-items: center;
+      min-width: 160px;
+      height: 22px;
+      padding: 0 4px;
+      background: #c0c0c0;
+      border: 1px solid;
+      border-color: #ffffff #808080 #808080 #ffffff;
+      font-size: 11px;
+
+      & img {
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+      }
+
+      & span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      &.active {
+        border-color: #808080 #ffffff #ffffff #808080;
+        box-shadow: inset 1px 1px #0a0a0a, inset -1px -1px #ffffff;
+        background-image:
+          linear-gradient(45deg, #909597 25%, transparent 25%),
+          linear-gradient(-45deg, #909597 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #909597 75%),
+          linear-gradient(-45deg, transparent 75%, #909597 75%);
+        background-size: 4px 4px;
+        background-position: 0 0, 0 2px, 2px -2px, -2px 0px;
+      }
+
+      &:hover {
+        border-color: #808080 #ffffff #ffffff #808080;
+      }
+    }
+  }
+}

@@ -1,0 +1,118 @@
+/* Main Calendar Container */
+.window-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 8px;
+    background: silver;
+}
+
+/* Header Section */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 8px;
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+.current-month {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Navigation Buttons */
+.prev-month,
+.next-month {
+    font-family: Webdings;
+    min-width: 30px;
+    height: 25px;
+    font-size: 16px;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    background: #ffffff;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+.weekday {
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+    border-right: 1px solid grey;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 100px;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    background: #ffffff;
+}
+
+/* Calendar Day Cells */
+.calendar-day {
+    border: 1px solid grey;
+    padding: 4px;
+    height: 100px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+
+    &.empty {
+        background: silver;
+    }
+}
+
+.day-number {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+/* Event Display */
+.day-events {
+    font-size: 12px;
+}
+
+.event {
+    margin: 2px 0;
+    padding: 2px 4px;
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+/* Event List */
+.event-list {
+    min-height: 100px;
+    max-height: 200px;
+    flex: 0 1 auto;
+    margin-top: 8px;
+    padding: 8px;
+    overflow-y: auto;
+    border: 1px solid grey;
+    background: #ffffff;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+
+.event-item {
+    padding: 4px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid grey;
+}

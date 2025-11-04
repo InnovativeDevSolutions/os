@@ -1,0 +1,139 @@
+/* Window Component
+   Core styling for the Windows-style window interface */
+
+.win99-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 600px;
+
+    /* Window States */
+    &.active {
+        z-index: 1000;
+    }
+
+    &:not(.active) {
+        z-index: 100;
+    }
+
+    &.maximized {
+        top: 0;
+        left: 0;
+        transform: none;
+        width: calc(100vw - 8px);
+        height: calc(100vh - 42px);
+        margin: 0 !important;
+    }
+
+    &.minimized {
+        display: none;
+    }
+
+    /* Title Bar */
+    & .title-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & .title-bar-icon {
+            width: 16px;
+            height: 16px;
+            /* transform: scale(2.5);
+            transform-origin: center; */
+        }
+
+        & .title-bar-text {
+            flex: 1;
+            text-align: center;
+        }
+
+        & .title-bar-controls {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    /* Menu Bar */
+    & .menu-bar {
+        display: flex;
+        padding: 2px 0;
+        background: #c0c0c0;
+        border-bottom: 1px solid #808080;
+
+        & .menu-item {
+            position: relative;
+            padding: 2px 6px;
+            font-size: 12px;
+            cursor: default;
+            color: #222222;
+
+            &:hover {
+                background: #000080;
+                color: white;
+
+                & .submenu {
+                    display: block;
+                }
+            }
+
+            & .submenu {
+                position: absolute;
+                top: calc(100% + 1px);
+                left: 0;
+                background: #c0c0c0;
+                border: 2px solid;
+                border-color: #ffffff #808080 #808080 #ffffff;
+                display: none;
+                min-width: 150px;
+                z-index: 1000;
+            }
+        }
+    }
+
+    /* Toolbar Area */
+    & .toolbar-area {
+        background: #c0c0c0;
+        border-bottom: 1px solid #808080;
+        padding: 4px;
+    }
+
+    /* Window Body */
+    & .window-body {
+        display: flex;
+        flex-direction: column;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: calc(100% - 48px) !important;
+
+        & .content {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+        }
+    }
+
+    /* Status Bar */
+    & .status-bar {
+        height: 24px;
+        background: #c0c0c0;
+        border-top: 1px solid #808080;
+        padding: 2px 4px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}
+
+/* Application-Specific Window Heights */
+.win99-window.notepad-window .window-body {
+    height: calc(100% - 68px) !important;
+}
+
+.win99-window.browser-window .window-body {
+    height: calc(100% - 120px) !important;
+}

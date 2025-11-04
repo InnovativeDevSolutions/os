@@ -1,0 +1,14 @@
+dir = "@forge_os";
+name = "Forge OS";
+author = "IDSolutions";
+picture = "title_ca.paa";
+logoSmall = "icon_64_ca.paa";
+logo = "icon_128_ca.paa";
+logoOver = "icon_128_highlight_ca.paa";
+tooltip = "Forge OS";
+tooltipOwned = "IDS Owned";
+overview = "Forge OS - Official Modification";
+description = "Forge OS - Version 1.0.0";
+action  = "https://innovativedevsolutions.org";
+actionName  = "Website";
+dlcColor[] = {0.45, 0.47, 0.41, 1};
