@@ -1,4 +1,4 @@
-#include "..\Win99\main\RscDialogs.hpp"
+// #include "..\Win99\main\RscDialogs.hpp"
 
 // class OSDialog {
 //     idd = 13371338;
