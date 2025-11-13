@@ -182,8 +182,8 @@ Forge OS 2.0 uses a modern object-oriented architecture with HashMapObject insta
 private _calendar = [] call win99_calendar_fnc_createCalendar;
 
 // Call methods
-[_eventData] call (_calendar get "addEvent");
-[_eventId] call (_calendar get "deleteEvent");
+_calendar call ["createEvent", [_eventData]];
+_calendar call ["deleteEvent", [_eventId]];
 ```
 
 ### Communication Flow
