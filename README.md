@@ -5,6 +5,50 @@ A fully functional Windows 99-style operating system interface for Arma 3, featu
 ![Arma 3](https://img.shields.io/badge/Arma%203-Compatible-green)
 ![Version](https://img.shields.io/badge/Version-2.0.0-blue)
 
+📖 **[View Full Documentation](https://yourusername.github.io/forge_os/)** | 🚀 **[Quick Start](#quick-start)** | 💬 **[Discord Community](#)**
+
+## Quick Start
+
+### For Players
+
+1. **Install Required Mods**: [CBA_A3](https://steamcommunity.com/workshop/filedetails/?id=450814997) and [ACE3](https://steamcommunity.com/workshop/filedetails/?id=463939057)
+2. **Load Mission**: Open `forge_os_bare.VR` in the Arma 3 Editor
+3. **Preview**: Click Preview and approach the keyboard object
+4. **Open OS**: Press Windows key (ACE interaction) → Select "Open OS"
+5. **Explore**: Use the desktop, start menu, and applications!
+
+### For Mission Makers
+
+**Add Custom Mission Briefings:**
+
+1. Place your markdown file in `mpmissions/forge_os_bare.VR/snet/ops/briefings/`
+2. Run the converter: `tools/media_to_base64.exe` (enter `..` when prompted for recursive processing)
+3. Update `Win99UI/js/config.js` to register the file
+4. Your briefing is now accessible in the SNet Intelligence Center!
+
+**[View Full Media Management Guide →](https://yourusername.github.io/forge_os/customization/media-management)**
+
+### For Developers
+
+**Create Your First App:**
+
+```javascript
+class MyApp extends Window {
+    constructor() {
+        super({
+            title: 'My Application',
+            icon: 'FORGE_FX_Desktop_Ico_Notepad01_CA',
+            width: 800,
+            height: 600
+        });
+        // Your app code here
+    }
+}
+window.MyApp = MyApp;
+```
+
+**[View Full Development Guide →](https://yourusername.github.io/forge_os/customization/custom-applications)**
+
 ## Overview
 
 **Forge OS** brings a vintage Windows 98/99 computing experience into Arma 3. Players can interact with a fully functional operating system through in-game computer terminals, complete with draggable windows, functional applications, and multiplayer synchronization. Perfect for role-playing scenarios, mission briefings, intelligence coordination, and immersive gameplay experiences.
@@ -125,7 +169,8 @@ forge_os/
 │       │   ├── messenger/         # Messenger application
 │       │   ├── notepad/           # Notepad application
 │       │   ├── snet/              # Intelligence system
-│       │   └── network/           # Network utilities
+│       │   ├── email/             # Email module (stub)
+│       │   └── db/                # Database utilities
 │       │
 │       ├── Win99UI/               # Frontend JavaScript
 │       │   ├── index.html         # Entry point
@@ -272,8 +317,20 @@ Executables will be created in `dist/` directory.
 
 ## Documentation
 
-Comprehensive documentation available in the mission folder:
+### 📚 **[Complete Documentation Wiki](https://yourusername.github.io/forge_os/)**
 
+Comprehensive guides and tutorials available online:
+
+**Getting Started:**
+- **[Introduction](https://yourusername.github.io/forge_os/getting-started/introduction)** - Overview and features
+- **[Installation](https://yourusername.github.io/forge_os/getting-started/installation)** - Setup for players and developers
+- **[Project Structure](https://yourusername.github.io/forge_os/getting-started/project-structure)** - Codebase organization
+
+**Customization:**
+- **[Media Management](https://yourusername.github.io/forge_os/customization/media-management)** - Add images, videos, audio, and markdown
+- **[Custom Applications](https://yourusername.github.io/forge_os/customization/custom-applications)** - Build your own apps
+
+**Additional Resources:**
 - **[codebase-summary.md](mpmissions/forge_os_bare.VR/codebase-summary.md)** - Complete technical overview
 - **[workshop-readme.md](mpmissions/forge_os_bare.VR/workshop-readme.md)** - Steam Workshop description
 - **[Win99UI/tools/README.md](mpmissions/forge_os_bare.VR/Win99UI/tools/README.md)** - Asset processing tools guide
