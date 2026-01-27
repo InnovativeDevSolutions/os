@@ -16,7 +16,7 @@ Transform your missions with an immersive computer terminal experience complete 
 #links
   :::u-button
   ---
-  color: neutral
+  color: success
   size: xl
   to: /getting-started/introduction
   trailing-icon: i-lucide-arrow-right
